@@ -34,7 +34,7 @@ paragraphStyleChanger is an InDesign script that finds and applies **conditional
 
 ## Installation
 
-1. Download `paragraphstylechanger2-82.jsx`
+1. Download `paragraphstylechanger2-82.jsx` (icons not needed – icons are included stringyfied in source-code)
 2. Place the file in your InDesign Scripts folder:
    - **Windows**: `C:\Users\[Username]\AppData\Roaming\Adobe\InDesign\Version [XX]\[Locale]\Scripts\Scripts Panel\`
    - **macOS**: `~/Library/Preferences/Adobe InDesign/Version [XX]/[Locale]/Scripts/Scripts Panel/`
