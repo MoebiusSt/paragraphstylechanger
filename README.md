@@ -13,7 +13,7 @@ paragraphStyleChanger is an InDesign script that finds and applies **conditional
 ### Key Features
 
 - **Conditional Style Matching**: Find paragraphs based on their style AND the style of adjacent paragraphs
-- **Chainable Queries** (v2.82): Execute multiple find/change tasks in sequence with a single click
+- **Chainable Queries** (v2.82): Execute multiple find/change tasks in sequence with a single click for complex task automation
 - **Modeless Palette**: Stays open while you work, updates automatically when switching documents
 - **Smart Style Tracking**: Handles renamed and moved styles by matching both name and unique ID
 - **Saveable User Queries**: Store frequently used style combinations per document
@@ -26,9 +26,9 @@ paragraphStyleChanger is an InDesign script that finds and applies **conditional
 
 | Main Interface (Dark Theme) | Chainable Queries (v2.82) |
 |:---------------------------:|:-------------------------:|
-| ![paragraphStyleChanger UI](paragraphstylechanger2-80.jpg) | ![Chained Queries Dialog](paragraphstylechanger_2-82-chained-commands.jpg) |
+| ![paragraphStyleChanger UI](screenshot_2-80_dark.jpg) | ![Chained Queries Dialog](screenshot_2-82_light_chained-commands.jpg) |
 
-*Left: The main palette adapts to InDesign's UI color scheme. Right: New in v2.82 – chain multiple queries and execute them in sequence.*
+*Left: The palette adapts to InDesign's color scheme. Right: New in v2.82 – manage chains of find/change queries and execute multiple in sequence.*
 
 ---
 
@@ -64,7 +64,7 @@ Click 'Get Styles' to fetch paragraph styles from your current selection directl
 Create patterns like A-B-A-B-A using the special mode: find **[Any Style] followed by [Any Style]** → change to **Style-A followed by Style-B**.
 
 ### No-Style Workflow
-Set paragraphs to **[No Paragraph Style]** to temporarily break their link to a style. Later, find and reassign all unlinked paragraphs.
+Set paragraphs to **[No Paragraph Style]** to temporarily break their link to a style. Later, find and reassign all _unlinked_ paragraphs as a condition. (Can be very handy!)
 
 ---
 
