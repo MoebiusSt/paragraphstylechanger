@@ -1,4 +1,4 @@
-﻿#targetengine "paraStyleChanger"
+#targetengine "paraStyleChanger"
 #target indesign
 
 function main () {
@@ -75,7 +75,7 @@ If this script is a regular timesaver for you please consider donating a little 
 
 _____________
 CHANGELOG
-v2.83 - December 2025 - Fixed: Chain mode now properly exits when using getStyles buttons or anyStyle buttons. Switch buttons are disabled during chain mode.
+v2.83 - December 2025 - Fixed: Chain mode now properly exits when using getStyles buttons or anyStyle buttons. Switch buttons are disabled during chain mode. Chain mode state is now preserved across script restarts.
 v2.82 - December 2025 - New feature: Added chainable queries. Manage chains and query execution order and run multiple find/change tasks at once.
 v2.81 - August 2025 - Hopefully fixed: Mac performance issues when selecting paragraph styles. Fixed: Style renaming detection bug when style name is changed back to a previously used name.
 v2.80 - August 2025 - Fixed: EventHandler error when starting script a second time. Prevent reinitialization if script is already running. Replaced rescource intensive idleTask with proper eventHandling
@@ -590,16 +590,21 @@ IDEAS
                     updateQL();
                     _stopCalls = false;
                     
-                    var q = ql.selection.get();
-                    log('onActivate: docChanged ... call updateDDs(q:' + q.name + ')');
-                    updateDDs(q.set);
+                    // Only update DDs if not in chain mode (updateQL may have restored chain mode)
+                    if (!_chainModeActive) {
+                        var q = ql.selection.get();
+                        log('onActivate: docChanged ... call updateDDs(q:' + q.name + ')');
+                        updateDDs(q.set);
+                    } else {
+                        log('onActivate: docChanged ... skipping updateDDs (chain mode active)');
+                    }
                 }
                 if((stylesChanged(_cachedSignatures) && !_docChanged) || shouldUpdateNames()) {
                     log('onActivate: styles did change or names need update - calling matchRenamed');
                     matchRenamed(); // matchRenamed will call updateDD too.
                 }
-                if (_firstRun && _prefs.startFind) { 
-                // get styles from document immediatly if this setting is used.
+                if (_firstRun && _prefs.startFind && !_chainModeActive) { 
+                // get styles from document immediatly if this setting is used (skip if in chain mode)
                     w.p.m.titlefsp.but_getfsp.notify();
                 }
                 _firstRun = false;
@@ -1387,12 +1392,14 @@ IDEAS
     }
     // ===========================================
     // Enter chain mode: cache current DD state and show "[-Chain-]" in all dropdowns
-    function enterChainMode() {
+    // Optional cachedState parameter allows restoring from saved state (e.g., on script restart)
+    function enterChainMode(cachedState) {
         if (_chainModeActive) return; // already in chain mode
         
         log('enterChainMode: caching current DD state');
         // Cache current dropdown state before switching to chain mode
-        _cachedDDState = getCurrentDDs();
+        // Use provided cached state if available (for restoration), otherwise cache current state
+        _cachedDDState = cachedState || getCurrentDDs();
         _chainModeActive = true;
         
         // Reset query dropdown to [User/Custom]
@@ -1698,6 +1705,11 @@ IDEAS
        ql.selChain = qlDP.selChain;
        if (w && w.p && w.p.m && w.p.m.grpChain) {
            refreshChainDropdown();
+           // Restore chain mode if it was active when script was last closed
+           if (qlDP.chainModeActive && qlDP.selChain > 0 && !_chainModeActive) {
+               log('updateQL: restoring chain mode from saved state');
+               enterChainMode(qlDP.cachedDDState);
+           }
        }
     }
     // ===========================================  
@@ -1715,6 +1727,9 @@ IDEAS
             // Store chains
             lbl.chains = ql.chains || [];
             lbl.selChain = ql.selChain || 0;
+            // Store chain mode state for restoration on next start
+            lbl.chainModeActive = _chainModeActive || false;
+            lbl.cachedDDState = _cachedDDState || null;
             // the insertLabel won't pollute indesigns undo-history this way
             app.doScript(function(){ad.insertLabel(_scrLbl, lbl.toSource())}, undefined, undefined, UndoModes.AUTO_UNDO, "Store label");
         }
