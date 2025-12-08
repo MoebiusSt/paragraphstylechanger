@@ -2,7 +2,7 @@
 
 **A powerful Adobe InDesign script for finding and replacing paragraph style combinations.**
 
-> Version 2.83 | by Stephan Möbius | 03. December 2025
+> Version 2.84 | by Stephan Möbius | 08. December 2025
 
 ---
 
