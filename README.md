@@ -118,6 +118,7 @@ When using floating (non-docked) InDesign panels, the script may not detect wind
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **2.84** | Dec 2025 | Fixed: Fixed: old-version-settings-import not correctly updating status after import since version 2.82.|
 | **2.83** | Dec 2025 | Fixed: Chain mode now properly exits in more cases and Switch-buttons are disabled during chain mode. Chain mode state is now preserved across script restarts.|
 | **2.82** | Dec 2025 | New feature: Chainable queries for running multiple find/change tasks at once |
 | **2.81** | Aug 2025 | Fixed Mac performance issues; Fixed style renaming detection bug |
