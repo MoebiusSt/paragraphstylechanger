@@ -1,13 +1,13 @@
-﻿#targetengine "paraStyleChanger"
+#targetengine "paraStyleChanger"
 #target indesign
 
 function main () {
 var ScriptName = 'paragraphStyleChanger';
-var ScriptVersion = '2.84';
+var ScriptVersion = '2.85';
 
 var __readMe =  
 '''
-paragraphStyleChanger.jsx | v.2.84
+paragraphStyleChanger.jsx | v.2.85
 -------------------------------------------------
 by Stephan Möbius, last edited: 08. December 2025.
 
@@ -1223,8 +1223,8 @@ w.p.s.getOldLbl.c.addEventListener("click", function() {
             de: 'Kette: ' + stepsRun + ' Schritte, ' + totalMatches + ' Treffer, ' + totalChanged + ' geändert.'
         });
         
-        // Restore to first query (or leave at last) - optional
-        // ql.selection = 0;
+        // Restore chain mode UI after execution (updateDDs removes the [-Chain-] items)
+        refreshChainModeItems();
     }
     // ================ Sprites (Image-Buttons) ================= 
     var mouseEventHandler = function(ev)
@@ -1409,7 +1409,11 @@ w.p.s.getOldLbl.c.addEventListener("click", function() {
     // Enter chain mode: cache current DD state and show "[-Chain-]" in all dropdowns
     // Optional cachedState parameter allows restoring from saved state (e.g., on script restart)
     function enterChainMode(cachedState) {
-        if (_chainModeActive) return; // already in chain mode
+        if (_chainModeActive) {
+            // Already in chain mode, but UI might need refresh (e.g., after runChain)
+            refreshChainModeItems();
+            return;
+        }
         
         log('enterChainMode: caching current DD state');
         // Cache current dropdown state before switching to chain mode
@@ -1491,6 +1495,29 @@ w.p.s.getOldLbl.c.addEventListener("click", function() {
                     break;
                 }
             }
+        }
+    }
+    // ===========================================
+    // Refresh chain mode items in dropdowns (restore [-Chain-] display after operations)
+    function refreshChainModeItems() {
+        if (!_chainModeActive) return;
+        var dds = [ff, fs, cf, cs];
+        for (var i = 0; i < dds.length; i++) {
+            var dd = dds[i];
+            // Check if chain mode item exists
+            var hasChainItem = false;
+            for (var j = 0; j < dd.items.length; j++) {
+                if (dd.items[j].chainModeItem || dd.items[j].text === nameOfChainMode) {
+                    hasChainItem = true;
+                    break;
+                }
+            }
+            // Add if missing
+            if (!hasChainItem) {
+                var chainItem = dd.add('item', nameOfChainMode, 0);
+                chainItem.chainModeItem = true;
+            }
+            dd.selection = 0;
         }
     }
     // ===========================================

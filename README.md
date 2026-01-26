@@ -2,7 +2,7 @@
 
 **A powerful Adobe InDesign script for finding and replacing paragraph style combinations.**
 
-> Version 2.84 | by Stephan Möbius | 08. December 2025
+> Version 2.85 | by Stephan Möbius | 27. January 2026
 
 ---
 
@@ -118,6 +118,7 @@ When using floating (non-docked) InDesign panels, the script may not detect wind
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **2.85** | Jan 2026 | Fixed: Chain mode UI now correctly maintains "[-Chain-]" state after execution; Re-selecting a chain now properly restores chain mode display |
 | **2.84** | Dec 2025 | Fixed: Fixed: old-version-settings-import not correctly updating status after import since version 2.82.|
 | **2.83** | Dec 2025 | Fixed: Chain mode now properly exits in more cases and Switch-buttons are disabled during chain mode. Chain mode state is now preserved across script restarts.|
 | **2.82** | Dec 2025 | New feature: Chainable queries for running multiple find/change tasks at once |
