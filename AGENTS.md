@@ -275,6 +275,7 @@ graph TB
 6. **Document**: Update README.md changelog and AGENTS.md version info
 7. **Commit & Tag**: Commit changes, create git tag `v2.XX`
 8. **Push to Remote**: `git push origin main && git push origin v2.XX`
+9. **GitHub Release**: Create release on GitHub (Releases → Draft → select tag → release notes → Publish)
 
 ### Fixing a Bug
 
@@ -285,6 +286,7 @@ graph TB
 5. **Document**: Update README.md changelog and AGENTS.md version info
 6. **Commit & Tag**: Commit changes, create git tag `v2.XX`
 7. **Push to Remote**: `git push origin main && git push origin v2.XX`
+8. **GitHub Release**: Create release on GitHub (Releases → Draft → select tag → release notes → Publish)
 
 ### Modifying UI
 
@@ -390,4 +392,5 @@ paragraphstylechanger/
 - [ ] Tag release: `git tag v2.XX`
 - [ ] Push commits to remote: `git push origin main`
 - [ ] Push tag to remote: `git push origin v2.XX`
+- [ ] Create GitHub Release: Go to GitHub → Releases → "Draft a new release" → select tag → add release notes → Publish
 - [ ] In `AGENTS.md` update version number and documentation of added or changed core functions or file structure
