@@ -1,0 +1,32 @@
+# Archive - alte Versionen nicht online stellen
+_archive/
+
+# Icons - nur v3 wird getrackt, Source-Material bleibt lokal
+icons/_dump/
+icons/v2/
+icons/tests/
+icons/_pngConversion*.jsx
+icons/**/*.txt
+
+# Development-Ressourcen
+resources/
+tests/
+
+# Temporäres Clone-Verzeichnis
+temp_repo_clone/
+
+# URL-Dateien
+*.url
+
+# System-Dateien
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor-spezifische Dateien
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
