@@ -2,7 +2,7 @@
 
 **A powerful Adobe InDesign script for finding and replacing paragraph style combinations.**
 
-> Version 2.86 | by Stephan Möbius | 04. April 2026
+> Version 2.87 | by Stephan Möbius | 15. June 2026
 
 ---
 
@@ -118,6 +118,7 @@ When using floating (non-docked) InDesign panels, the script may not detect wind
 
 | Version | Date | Changes |
 |---------|------|---------|
+| **2.87** | Mai 2026 | Fixed: fix: long filenames pushing initial panel width on startup too wide. Speed improvement. |
 | **2.86** | Apr 2026 | Fixed: styleName shortening now adapt dynamically to available panel width and dropdowns re-populute after resize in order to adapt force an update to width. |
 | **2.85** | Jan 2026 | Fixed: Chain mode UI now correctly maintains "[-Chain-]" state after execution; Re-selecting a chain now properly restores chain mode display |
 | **2.84** | Dec 2025 | Fixed: Fixed: old-version-settings-import not correctly updating status after import since version 2.82.|
